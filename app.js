@@ -17,7 +17,7 @@ var options = { method: 'POST',
             accept: '*/*' },
     form: {
     maxRes:400,
-    q:"COEN 21"
+    q:"Math 10"
     }
 };
 /*
@@ -28,7 +28,26 @@ request(options, function (error, response, body) {
 });
 */
 
+/*
+This classes array is a stack array storing course objects with the following parameters
+
+courseTitle
+className
+subject
+term
+catalog_nbr
+startTime
+endTime
+location
+intructor
+seatsLeft
+*/
 var classes=[];
+
+
+
+
+
 function get_data(course,options2,request){
     options2.form.q=course;
 
@@ -36,18 +55,41 @@ function get_data(course,options2,request){
     request(options2,function (error, response, body) {
         if (error) throw new Error(error);
 
-        //create an array with data of section and add it to the big array of classes
-        body.results.foreach
-        var section= new Object();
-        section.courseName=body.title;
-        section.term=body
+        //Parse body string into a readable JSON format
+        parsedBody=JSON.parse(response.body);
 
-        //push the section object on the classes stack
-        classes.push(section);
+        //create an array with data of section and add it to the big array of classes
+        //console.log(body);
+
+        arr=parsedBody.results;
+        for (var i = 0, len = arr.length; i < len; i++) {
+            var section= new Object();
+            section.courseTitle=parsedBody.title;
+            section.className=arr[i].class_descr;
+
+            section.subject=arr[i].subject;
+            section.term=arr[i].strm_descr;
+            section.catalog_nbr=arr[i].catalog_nbr;
+
+            section.startTime=arr[i].mtg_time_beg_1;
+            section.endTime=arr[i].mtg_time_end_1;
+
+            section.location=arr[i].mtg_facility_1;
+            section.intructor=arr[i].instr_1;
+
+            section.seatsLeft=arr[i].seats_remaining;
+
+            //push the section object on the classes stack
+            classes.push(section);
+
+        }
+        console.log(classes);
+
+
     });
 
-    console.log(data);
 }
 
-
-get_data("COEN 19",options,request);
+//Requests and prints requested data in a stack array
+//Change course name to get different search results
+get_data("COEN 21",options,request);
