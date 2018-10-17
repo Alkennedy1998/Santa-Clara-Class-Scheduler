@@ -43,13 +43,14 @@ location
 intructor
 seatsLeft
 */
-var classes=[];
+
 
 
 
 
 
 function get_data(course,options2,request){
+	var classes=[];
     options2.form.q=course;
 
     //Function to request data and call back to return said data
@@ -94,4 +95,5 @@ function get_data(course,options2,request){
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
+get_data("CSCI 61",options,request);
 get_data("MATH 51",options,request);
