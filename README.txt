@@ -1,1 +1,2 @@
-Idea by Matthew Zhang
+Idea by: Matthew Zhang
+Created by:
