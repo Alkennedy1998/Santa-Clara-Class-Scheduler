@@ -36,6 +36,7 @@ className
 subject
 term
 catalog_nbr
+course_nbr
 startTime
 endTime
 location
