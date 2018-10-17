@@ -70,6 +70,7 @@ function get_data(course,options2,request){
             section.subject=arr[i].subject;
             section.term=arr[i].strm_descr;
             section.catalog_nbr=arr[i].catalog_nbr;
+			section.course_nbr=arr[i].class_nbr;
 
             section.startTime=arr[i].mtg_time_beg_1;
             section.endTime=arr[i].mtg_time_end_1;
@@ -92,4 +93,4 @@ function get_data(course,options2,request){
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-get_data("COEN 21",options,request);
+get_data("MATH 51",options,request);
