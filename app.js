@@ -96,5 +96,7 @@ function get_data(course,options2,request){
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-get_data("COEN 79",options,request);
+//get_data("COEN 79",options,request);
 get_data("MATH 51",options,request);
+get_data("MATH 12",options,request);
+get_data("AMTH 106",options,request);
