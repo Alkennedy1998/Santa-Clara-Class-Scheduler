@@ -61,7 +61,7 @@ function get_data(course,options2,request){
         parsedBody=JSON.parse(response.body);
 
         //create an array with data of section and add it to the big array of classes
-        //console.log(body);
+       // console.log(body);
 
         arr=parsedBody.results;
         for (var i = 0, len = arr.length; i < len; i++) {
@@ -74,6 +74,7 @@ function get_data(course,options2,request){
             section.catalog_nbr=arr[i].catalog_nbr;
 			section.course_nbr=arr[i].class_nbr;
 
+			section.days=arr[i].mtg_days_1;
             section.startTime=arr[i].mtg_time_beg_1;
             section.endTime=arr[i].mtg_time_end_1;
 
@@ -95,5 +96,5 @@ function get_data(course,options2,request){
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-get_data("CSCI 61",options,request);
+get_data("COEN 79",options,request);
 get_data("MATH 51",options,request);
