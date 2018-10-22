@@ -1,3 +1,4 @@
+var Section = require('./section.js');
 var request = require("request");
 
 var options = { method: 'POST',
@@ -65,8 +66,16 @@ function get_data(course,options2,request){
 
         arr=parsedBody.results;
         for (var i = 0, len = arr.length; i < len; i++) {
-            var section= new Object();
+            var section= new Section(parsedBody.title,
+									arr[i].mtg_time_beg_1,
+									arr[i].mtg_time_end_1,
+									arr[i].class_nbr,
+									arr[i].mtg_days_1,
+									arr[i].seats_remaining);
+			
+			/*
             section.courseTitle=parsedBody.title;
+			
             section.className=arr[i].class_descr;
 
             section.subject=arr[i].subject;
@@ -82,7 +91,7 @@ function get_data(course,options2,request){
             section.intructor=arr[i].instr_1;
 
             section.seatsLeft=arr[i].seats_remaining;
-
+			*/
             //push the section object on the classes stack
             classes.push(section);
 
@@ -99,4 +108,4 @@ function get_data(course,options2,request){
 //get_data("COEN 79",options,request);
 get_data("MATH 51",options,request);
 get_data("MATH 12",options,request);
-get_data("AMTH 106",options,request);
+get_data("COEN 12L",options,request);

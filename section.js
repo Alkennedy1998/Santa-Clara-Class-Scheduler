@@ -1,17 +1,17 @@
 class Section {
 	constructor(name, startTime, endTime, courseNum, days, seats) {
 		this.name = name;
-		this.startTime = convertTime(startTime);
-		this.endTime = convertTime(endTime);
+		this.startTime = Section.convertStartTime(startTime);
+		this.endTime = Section.convertEndTime(endTime);
 		this.courseNum = courseNum;
 		this.days = days;
-		this.seats = seats;
+		this.seats = parseInt(seats);
 	}
 	
-	convertStartTime(timeStr) {
+	static convertStartTime(timeStr) {
 		let timeNum;
 		//Splits string into the time and the period element
-		let tokens = startTime.split(" ");
+		let tokens = timeStr.split(" ");
 		//Stores the two time nums into nums and the period into period
 		let nums = tokens[0].split(":");
 		let period = tokens[1];
@@ -40,8 +40,8 @@ class Section {
 		return timeNum;
 	}
 	
-	convertEndTime(timeStr) {
-		var endTime = "12pm";
+	static convertEndTime(endTime) {
+		//var endTime = "12pm";
 		let numStr;
 		let period;
 		let nums;
@@ -86,3 +86,5 @@ class Section {
 		return timeNum;
 	}
 }
+
+module.exports = Section;
