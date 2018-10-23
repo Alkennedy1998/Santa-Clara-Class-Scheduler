@@ -135,13 +135,10 @@ function get_data(course,options2,request) {
 var datastruct=new pQueue();
 
 datastruct.printr();
-=======
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
->>>>>>> master
-=======
+
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
->>>>>>> master
