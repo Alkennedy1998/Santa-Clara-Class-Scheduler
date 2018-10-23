@@ -18,6 +18,7 @@ var options = { method: 'POST',
             accept: '*/*' },
     form: {
 <<<<<<< HEAD
+<<<<<<< HEAD
         maxRes: 400,
         q: "Math 10"
     }
@@ -26,6 +27,12 @@ var options = { method: 'POST',
 /*
 request(options, function (error, response, body) {
     if (error) throw new Error(error);
+=======
+    maxRes:400,
+    q:"Class name"
+    }
+};
+>>>>>>> master
 =======
     maxRes:400,
     q:"Class name"
@@ -120,6 +127,7 @@ function get_data(course,options2,request) {
 
 //get_data("COEN 79",options,request);
 <<<<<<< HEAD
+<<<<<<< HEAD
 //get_data("MATH 51",options,request);
 //get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
@@ -127,6 +135,11 @@ function get_data(course,options2,request) {
 var datastruct=new pQueue();
 
 datastruct.printr();
+=======
+get_data("MATH 12",options,request);
+//get_data("COEN 12L",options,request);
+
+>>>>>>> master
 =======
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
