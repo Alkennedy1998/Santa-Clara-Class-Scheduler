@@ -18,16 +18,11 @@ var options = { method: 'POST',
             accept: '*/*' },
     form: {
     maxRes:400,
-    q:"Math 10"
+    q:"Class name"
     }
 };
-/*
-request(options, function (error, response, body) {
-    if (error) throw new Error(error);
 
-    //console.log(body);
-});
-*/
+//var allClasses = [];
 
 /*
 This classes array is a stack array storing course objects with the following parameters
@@ -50,7 +45,7 @@ seatsLeft
 
 
 
-function get_data(course,options2,request){
+function get_data(course,options2,request) {
 	var classes=[];
     options2.form.q=course;
 
@@ -65,15 +60,19 @@ function get_data(course,options2,request){
        // console.log(body);
 
         arr=parsedBody.results;
-        for (var i = 0, len = arr.length; i < len; i++) {
+        for (var i = 0; i < arr.length; i++) {
+			
             var section= new Section(
-				parsedBody.title,
+				//Uses the subject and catalog_nbr to make name (instead of requestBody)
+				arr[i].subject.concat(' ', arr[i].catalog_nbr),
 				arr[i].mtg_time_beg_1,
 				arr[i].mtg_time_end_1,
 				arr[i].class_nbr,
 				arr[i].mtg_days_1,
 				arr[i].seats_remaining
 			);
+			//push the section object on the classes stack
+            classes.push(section);
 			
 			/*
             section.courseTitle=parsedBody.title;
@@ -94,20 +93,21 @@ function get_data(course,options2,request){
 
             section.seatsLeft=arr[i].seats_remaining;
 			*/
-            //push the section object on the classes stack
-            classes.push(section);
+            
 
         }
         console.log(classes);
-
-
+		//allClasses.push(classes);
+		
     });
-
+	//console.log(allClasses);
+	
 }
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
+
 //get_data("COEN 79",options,request);
-get_data("MATH 51",options,request);
 get_data("MATH 12",options,request);
-get_data("COEN 12L",options,request);
+//get_data("COEN 12L",options,request);
+
