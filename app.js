@@ -21,13 +21,8 @@ var options = { method: 'POST',
     q:"Class name"
     }
 };
-/*
-request(options, function (error, response, body) {
-    if (error) throw new Error(error);
 
-    //console.log(body);
-});
-*/
+//var allClasses = [];
 
 /*
 This classes array is a stack array storing course objects with the following parameters
@@ -50,7 +45,7 @@ seatsLeft
 
 
 
-function get_data(course,options2,request){
+function get_data(course,options2,request) {
 	var classes=[];
     options2.form.q=course;
 
@@ -102,10 +97,11 @@ function get_data(course,options2,request){
 
         }
         console.log(classes);
-
-
+		//allClasses.push(classes);
+		
     });
-
+	//console.log(allClasses);
+	
 }
 
 //Requests and prints requested data in a stack array
@@ -114,3 +110,4 @@ function get_data(course,options2,request){
 //get_data("COEN 79",options,request);
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
+
