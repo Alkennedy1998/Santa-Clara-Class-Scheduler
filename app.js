@@ -96,6 +96,12 @@ function get_data(course,options2,request){
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-get_data("COEN 79",options,request);
-get_data("MATH 51",options,request);
-get_data("PHYS 33",options,request);
+new get_data1 = get_data("COEN 79",options,request);
+new get_data2 = get_data("MATH 51",options,request);
+new get_data3 = get_data("PHYS 33",options,request);
+
+var courses = [3]; 
+courses.push(get_data1);
+courses.push(get_data2);
+courses.push(get_data3);
+
