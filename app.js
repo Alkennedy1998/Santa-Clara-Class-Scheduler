@@ -40,7 +40,7 @@ intructor
 seatsLeft
 */
 
-function get_data(course,options2,request) {
+function get_data(course,options2,request, callBackTest) {
 	var classes=[];
     options2.form.q=course;
 
@@ -92,23 +92,30 @@ function get_data(course,options2,request) {
 
         }
         console.log(classes);
+        console.log(classes.length);
+        return classes;
 		//allClasses.push(classes);
 		
     });
 	//console.log(allClasses);
 	
 }
-
+function callBackTest(){
+    console.log("FirstTEts")
+    console.log("TESTSecond")
+}
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-var vr_course = new get_data("ARTS 185",options,request);//will give just one section for sake of testing 
-var coen_course = new get_data("COEN 79",options,request);
-var math_course = new get_data("MATH 12",options,request);
+var vr_course = get_data("ARTS 185",options,request,callBackTest);//will give just one section for sake of testing 
+var coen_course = get_data("COEN 79",options,request,callBackTest);
+var math_course = get_data("MATH 12",options,request,callBackTest);
 //get_data("COEN 12L",options,request);
+callBackTest();
+console.log("Requested info for classes");
 
-console.log(vr_course.classes.length);
-console.log(coen_course.classes.length);
-console.log(math_course.classes.length);
+//console.log(vr_course.length());
+//console.log(coen_course.length());
+//console.log(math_course.length());
 
 
 //different types of trees:
