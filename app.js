@@ -98,3 +98,4 @@ function get_data(course,options2,request){
 //Change course name to get different search results
 get_data("COEN 79",options,request);
 get_data("MATH 51",options,request);
+get_data("PHYS 33",options,request);
