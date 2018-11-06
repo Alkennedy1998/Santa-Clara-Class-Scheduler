@@ -106,3 +106,39 @@ function get_data(course,options2,request) {
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
+
+//different types of trees:
+//Binary Tree: Wont work for more than two sections per course 
+//Heap Tree: Needs to be ordered based on value, perhaps could assign a value to each node reflecting 
+//# of sections (for level) and then use time and go from left to right for that? (would be implemented w/ array)
+//AVL Tree: Is a form of BST so won't work either 
+//Huffman Tree?!?! Could perhaps work, need to look into it more, used it for encding strings, but maybe can implement to use frequenecy of 
+//sections per time slot instead of frequency of characters per text file... Huffman tree was built with priority queue 
+//
+
+
+
+
+
+//DO A REGULAR TREE IMPLEMENTED THROUGH A STACK ARRAY IN PRE-ORDER 
+/*Functions needed:
+visit
+count
+height
+DESTROY IN POSTORDER
+
+
+*/
+/*
+HOW TO IMPLEMENT STACK ARRAY: 
+
+
+
+
+
+
+
+
+
+
+
