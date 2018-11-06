@@ -40,11 +40,6 @@ intructor
 seatsLeft
 */
 
-
-
-
-
-
 function get_data(course,options2,request) {
 	var classes=[];
     options2.form.q=course;
