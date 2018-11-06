@@ -106,9 +106,9 @@ var coen_course = new get_data("COEN 79",options,request);
 var math_course = new get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
-console.log(vr_course.arr.length);
-console.log(coen_course.arr.length);
-console.log(math_course.arr.length);
+console.log(vr_course.classes.length);
+console.log(coen_course.classes.length);
+console.log(math_course.classes.length);
 
 
 //different types of trees:
