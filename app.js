@@ -17,8 +17,6 @@ var options = { method: 'POST',
             origin: 'https://www.scu.edu',
             accept: '*/*' },
     form: {
-<<<<<<< HEAD
-<<<<<<< HEAD
         maxRes: 400,
         q: "Math 10"
     }
@@ -58,13 +56,51 @@ intructor
 seatsLeft
 */
 
+//Create a course object, populate its array of all sections, then push into pQueue
 
+function pQueue(){
+    //How many courses are currently avaliable
+    var totalCourseNumber=0;
 
+    //An array of courses which will all have arrays of each section
+    var courseArray=[];
 
+    this.sortByAvaliableCourseNum = function(){
+        //sort by avaliable course num putting the course with the least classes in the front
+    },
+    this.printAllPossibleSchedules = function(){
+        //print all possible schedules
+    }
+    this.addCourse=function(courseName){
+        //Check if course already is added
+        totalCourseNumber+=1;
+        courseArray.push(courseName);
+    }
+}
+
+function AddCourse(courseName){
+    pQueue.addCourse(courseName);
+
+}
+
+//Constructor for CourseClass
+function CoursesClass(courseName){
+    var courseName = courseName;
+    var avaliable = true;
+
+    var sectionArray =[];
+
+    this.sortSectionsByPriority=function(){
+
+    }
+    this.populateSectionArray = function(){
+
+    }
+}
 
 
 function get_data(course,options2,request) {
-	var classes=[];
+
     options2.form.q=course;
 
     //Function to request data and call back to return said data
@@ -91,27 +127,6 @@ function get_data(course,options2,request) {
 			);
 			//push the section object on the classes stack
             classes.push(section);
-			
-			/*
-            section.courseTitle=parsedBody.title;
-			
-            section.className=arr[i].class_descr;
-
-            section.subject=arr[i].subject;
-            section.term=arr[i].strm_descr;
-            section.catalog_nbr=arr[i].catalog_nbr;
-			section.course_nbr=arr[i].class_nbr;
-
-			section.days=arr[i].mtg_days_1;
-            section.startTime=arr[i].mtg_time_beg_1;
-            section.endTime=arr[i].mtg_time_end_1;
-
-            section.location=arr[i].mtg_facility_1;
-            section.intructor=arr[i].instr_1;
-
-            section.seatsLeft=arr[i].seats_remaining;
-			*/
-            
 
         }
         console.log(classes);
@@ -126,19 +141,19 @@ function get_data(course,options2,request) {
 //Change course name to get different search results
 
 //get_data("COEN 79",options,request);
-<<<<<<< HEAD
-<<<<<<< HEAD
-//get_data("MATH 51",options,request);
+// get_data("MATH 51",options,request);
 //get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
-var datastruct=new pQueue();
-
-datastruct.printr();
-get_data("MATH 12",options,request);
-//get_data("COEN 12L",options,request);
-
 
 get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
 
+
+//get_data("MATH 12",options,request);
+//get_data("COEN 12L",options,request);
+
+
+//MAIN STUFF
+
+var dataStructure= new pQueue();
