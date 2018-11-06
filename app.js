@@ -101,10 +101,14 @@ function get_data(course,options2,request) {
 
 //Requests and prints requested data in a stack array
 //Change course name to get different search results
-
-//get_data("COEN 79",options,request);
-get_data("MATH 12",options,request);
+var vr_course = new get_data("ARTS 185",options,request);//will give just one section for sake of testing 
+var coen_course = new get_data("COEN 79",options,request);
+var math_course = new get_data("MATH 12",options,request);
 //get_data("COEN 12L",options,request);
+
+console.log(vr_course.arr.length);
+console.log(coen_course.arr.length);
+console.log(math_course.arr.length);
 
 
 //different types of trees:
@@ -132,11 +136,28 @@ DESTROY IN POSTORDER
 /*
 HOW TO IMPLEMENT STACK ARRAY: 
 
+Stack is Last In/First Out
+push and pop items from array
+insert = push
+remove = pop
+O(1) for pop and push 
+
+push: O(1)
+assert(n<m);//not full
+a[n] = x;
+n++;
+
+pop: O(1)
+assert(n>0);//not empty
+x = a[n-1];
+n--;
+return x;
 
 
 
 
 
+*/
 
 
 
