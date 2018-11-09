@@ -84,7 +84,8 @@ pQueue.prototype.printAllPossibleSchedules = function(){
     console.log("Your optimal schedule -->\n");
 
     this.courseArray.forEach(function(element){
-        console.log("Course : ",element.sectionArray[0].name," at ",);
+        var section=element.sectionArray[0];
+        console.log("Course : ",section.name," at ",section.startTimeReadable, " to ",section.endTimeReadable);
     })
 
 };

@@ -3,6 +3,8 @@ class Section {
 		this.name = name;
 		this.startTime = Section.convertStartTime(startTime);
 		this.endTime = Section.convertEndTime(endTime);
+		this.startTimeReadable=startTime;
+		this.endTimeReadable=endTime;
 		this.courseNum = courseNum;
 		this.days = days;
 		this.seats = parseInt(seats);
