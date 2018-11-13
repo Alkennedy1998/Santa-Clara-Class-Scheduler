@@ -83,10 +83,75 @@ pQueue.prototype.printAllPossibleSchedules = function(){
 
     console.log("Your optimal schedule -->\n");
 
-    this.courseArray.forEach(function(element){
-        var section=element.sectionArray[0];
-        console.log("Course : ",section.name," at ",section.startTimeReadable, " to ",section.endTimeReadable);
-    })
+    //console.log("Course : ",section.name," at ",section.startTimeReadable, " to ",section.endTimeReadable);
+
+
+
+    var actualThis=this;
+    function recursiveIterator(courseCounter){
+
+        var sectionCounter=0;
+        //console.log(actualThis.courseArray[courseCounter].sectionArray.length);
+
+        while(sectionCounter<actualThis.courseArray[courseCounter].sectionArray.length){
+
+            tempSchedule[courseCounter]=actualThis.courseArray[courseCounter].sectionArray[sectionCounter];
+           // console.log(tempSchedule[courseCounter]);
+
+            if(courseCounter==(actualThis.courseArray.length-1)){
+
+                //setTimeout(function(){ totalPossibleScheduleArray.push(tempSchedule); }, 5);
+                //totalPossibleScheduleArray.push(tempSchedule);
+
+
+                //console.log(tempSchedule);
+            }
+            else{
+                //Else call the iterator on the next
+                recursiveIterator(courseCounter+1);
+            }
+    sectionCounter++
+}
+
+    }
+
+    var totalPossibleScheduleArray=[];
+    var tempSchedule=[];
+    recursiveIterator(0);
+    console.log(totalPossibleScheduleArray);
+    //console.log(this.courseArray[2].sectionArray);
+    //console.log(totalPossibleScheduleArray[0]==totalPossibleScheduleArray[5]);
+
+
+    //not recursive implimentation?
+
+/*
+    var courseCounter = 0;
+
+    while(courseCounter<this.courseArray.length) {
+
+        var sectionCounter = 0;
+        //console.log(actualThis.courseArray[courseCounter].sectionArray.length);
+
+        while (sectionCounter < actualThis.courseArray[courseCounter].sectionArray.length) {
+
+            tempSchedule[courseCounter] = actualThis.courseArray[courseCounter].sectionArray[sectionCounter];
+            // console.log(tempSchedule[courseCounter]);
+
+            if (courseCounter == (actualThis.courseArray.length - 1)) {
+                totalPossibleScheduleArray.push(tempSchedule);
+
+
+                //console.log(tempSchedule);
+            }
+            else {
+                //Else call the iterator on the next
+                recursiveIterator(courseCounter + 1);
+            }
+            sectionCounter++
+        }
+    }
+*/
 
 };
 
@@ -182,10 +247,11 @@ var coenStudentsSchedule= new pQueue();
 function tester() {
     coenStudentsSchedule.addCourse("MATH 12",function(){
         coenStudentsSchedule.addCourse("COEN 12",function(){
-            //setTimeout(function(){ }, 3000);
+            coenStudentsSchedule.addCourse("ELEN 50",function(){
+                //setTimeout(function(){ }, 3000);
                 coenStudentsSchedule.printAllPossibleSchedules();
 
-
+            });
         });
     });
 
