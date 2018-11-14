@@ -21,6 +21,7 @@ var options = { method: 'POST',
         q: "Math 10"
     }
 };
+var Promise = require('promise');
 
 /*
 request(options, function (error, response, body) {
@@ -104,7 +105,7 @@ pQueue.prototype.printAllPossibleSchedules = function(){
                 //totalPossibleScheduleArray.push(tempSchedule);
 
 
-                //console.log(tempSchedule);
+                console.log(tempSchedule);
             }
             else{
                 //Else call the iterator on the next
@@ -117,8 +118,12 @@ pQueue.prototype.printAllPossibleSchedules = function(){
 
     var totalPossibleScheduleArray=[];
     var tempSchedule=[];
+
     recursiveIterator(0);
     console.log(totalPossibleScheduleArray);
+
+
+
     //console.log(this.courseArray[2].sectionArray);
     //console.log(totalPossibleScheduleArray[0]==totalPossibleScheduleArray[5]);
 
