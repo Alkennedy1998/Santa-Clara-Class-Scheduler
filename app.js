@@ -240,14 +240,8 @@ Course.prototype.populateSectionArray = function(course,callback){
 
 }
 
-//get_data("MATH 12",options,request);
-//get_data("COEN 12L",options,request);
-
-
-
-//MAIN STUFF
-
 var coenStudentsSchedule= new pQueue();
+
 
 function tester() {
     coenStudentsSchedule.addCourse("MATH 12",function(){
@@ -262,5 +256,7 @@ function tester() {
 
 
 }
-
 tester();
+//get_data("MATH 12",options,request);
+//get_data("COEN 12L",options,request);
+

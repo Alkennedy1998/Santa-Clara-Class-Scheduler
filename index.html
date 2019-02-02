@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="app.js"></script>
+    <script>
+        class Section {
+            constructor(name, startTime, endTime, courseNum, days, seats) {
+                this.name = name;
+                this.startTime = Section.convertStartTime(startTime);
+                this.endTime = Section.convertEndTime(endTime);
+                this.startTimeReadable=startTime;
+                this.endTimeReadable=endTime;
+                this.courseNum = courseNum;
+                this.days = days;
+                this.seats = parseInt(seats);
+            }
+
+            static convertStartTime(timeStr) {
+                let timeNum;
+                //Splits string into the time and the period element
+                let tokens = timeStr.split(" ");
+                //Stores the two time nums into nums and the period into period
+                let nums = tokens[0].split(":");
+                let period = tokens[1];
+                //Parses the values from strings to ints
+                nums[0] = parseInt(nums[0], 10);
+                nums[1] = parseInt(nums[1], 10);
+
+                //Checks for the special case of the hour being 12
+                let is12 = (nums[0] === 12) ? true : false;
+
+                //Checks what period it is and if hour is 12 and calculates timeNum accordingly
+                if (period.toLowerCase() === "am") {
+                    if (is12)
+                        timeNum = nums[1];
+                    else
+                        timeNum = (100 * nums[0]) + nums[1];
+                } else if (period.toLowerCase() === "pm"){
+                    if (is12)
+                        timeNum = 1200 + nums[1];
+                    else
+                        timeNum = (100 * nums[0]) + nums[1] + 1200;
+                } else {
+                    throw new Error("Invalid Input");
+                }
+
+                return timeNum;
+            }
+
+            static convertEndTime(endTime) {
+                //var endTime = "12pm";
+                let numStr;
+                let period;
+                let nums;
+                let timeNum;
+
+                //Since no space b/w time and period, uses substrings to separate
+                if (endTime.includes("am")) {
+                    numStr = endTime.substring(0, endTime.indexOf('a'));
+                    period = endTime.substring(endTime.indexOf("a"), endTime.length);
+                } else if (endTime.includes("pm")) {
+                    numStr = endTime.substring(0, endTime.indexOf('p'));
+                    period = endTime.substring(endTime.indexOf('p'), endTime.length);
+                } else {
+                    console.log("Invalid Input");
+                    throw new Error("Invalid Input");
+                }
+                nums = numStr.split(":");
+
+                //Parses the hours and minutes into nums
+                nums[0] = parseInt(nums[0]);
+                nums[1] = parseInt(nums[1]);
+
+                //Sometimes they don't give minutes if it's on the hour
+                if (isNaN(nums[1])) nums[1] = 0;
+
+                //checks if the hour is 12
+                let is12 = (nums[0] === 12) ? true : false;
+
+                //Checks what period it is and if hour is 12 and calculates timeNum accordingly
+                if (period.toLowerCase() === "am") {
+                    if (is12)
+                        timeNum = nums[1];
+                    else
+                        timeNum = (100 * nums[0]) + nums[1];
+                } else if (period.toLowerCase() === "pm"){
+                    if (is12)
+                        timeNum = 1200 + nums[1];
+                    else
+                        timeNum = (100 * nums[0]) + nums[1] + 1200;
+                }
+
+                return timeNum;
+            }
+        }
+
+
+
+            var options = { method: 'POST',
+                url: 'https://www.scu.edu/apps/ws/courseavail/search/4020/ugrad',
+                headers:
+                    { 'postman-token': '7cd6dfe8-18eb-6274-990e-900d443f84d8',
+                        'cache-control': 'no-cache',
+                        cookie: '_ga=GA1.2.1247169440.1530396441; _gid=GA1.2.53034684.1530396441; _4c_=dVRhb5swEP0rE1L4FBFsMJBIaIpo1mXq1ipruo%2BTMSZYA8xskzSqym%2FvmTSd2rWROHy%2Bd%2B%2Fd2UcenEPFW2eBiJ%2BgIEJxQqJk6vzhR%2B0sHhzWWbu35otUXHPuLF5WU2erubpUsgeUo2lrgoQEEezfKFn0zKwL2L8SZpPBXq9q8CpjusVstpPejtZ8Z3M9JhuvFnmn5P3R06z3eNHPOj0TXiE%2Fm2NKtbtPsYfcPn0RcYVJL9YSSF2dblZXq7vlj2zlduko5%2F416e16mGB8S4%2B1VBOcTbB%2FKxppqiOsLrxJsIT3914LBm%2FaFmAZ7YShtdDNKUrhqYQ2UtkcWYIxFQfb2f5bA%2FTDcHc9kHAY1tsBDcPN1mpmX6%2FX2erEkfVKjVB%2Fw%2FeCHzSsSluQv2S04M0ofyVyRZXgEATG5Xa4qURdiw58W%2FfG%2B%2Ba5dZO6%2BpAeXNqbKpN9a1IEp8pkYa8Ezb3Q88EvhGZyz9XxJ1d7wfj6AqKwnyt5gMsCJ6uUbPinyGaX9uIQDqPQJyQJPRTGcRKFBBMISpgA55doC8gEV%2FGSQy%2BWAjwtjNV9dYmwbbhqbBosO5gax4rUkgEKHJizqXO5%2FL0di3pf9nHq3J%2BmEWNMAowwAlYDowMA3%2F4AoQQM1jiWDiUJmUN6GbEiQkUUx3lZxnnICj9HURKD4siHyByoAh%2F5ERB0wDfmA%2FmzHDwEwih%2BlkPhi5zt5A16LA7Q8%2F%2BLK6ihOdX84yzsv9MSO3dkVG8%2FrddV49hizDOmpLXmbyA4mgOEtezc2seg5t%2FxxRyx2EdBwkmeRDHPsZ%2FAYZJ4Hvg5pvhtISeCnSrPpZz%2FN8bQO%2BDHxyc%3D; cX_G=cx%3A1wn8gqmnl5he12x16h4gdbw4i2%3Aykmb99z9d7i4; cX_P=jairjjaa9a8h449t; _ga=GA1.2.1246405584.1477864525; MAID=h6hjO7GjjEW/hXTPEnQenQ==; __unam=6aca27b-15ebb2a87f8-b54334f-4; MACHINE_LAST_SEEN=2018-06-14T18%3A41%3A05.291-07%3A00; _vwo_uuid_v2=D7C480D70160CEE4406DF04D22DE7386F|9edbac4604ea9fd23a7320d281de7e91; _vwo_uuid=D7C480D70160CEE4406DF04D22DE7386F; s_fid=23416A566F03CBEF-1D3E8B3E6FA9F2A9; AMCV_774C31DD5342CAF40A490D44%40AdobeOrg=793872103%7CMCIDTS%7C17700%7CMCMID%7C54767819144511968814036582437993054835%7CMCAAMLH-1529632044%7C9%7CMCAAMB-1529801511%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCAID%7CNONE; _gcl_au=1.1.880407339.1537941031; PHPSESSID=85e6e5d3f55b755260969b5dcf678215; _gid=GA1.2.1598081948.1538278390',
+                        'accept-language': 'en-US,en;q=0.9',
+                        'accept-encoding': 'gzip, deflate, br',
+                        referer: 'https://www.scu.edu/apps/courseavail/?p=schedule',
+                        'content-type': 'application/x-www-form-urlencoded',
+                        dnt: '1',
+                        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+                        'x-requested-with': 'XMLHttpRequest',
+                        origin: 'https://www.scu.edu',
+                        accept: '*/*' },
+                form: {
+                    maxRes: 400,
+                    q: "Math 10"
+                }
+            };
+            var Promise = require('promise');
+
+            /*
+            request(options, function (error, response, body) {
+                if (error) throw new Error(error);
+            =======
+                maxRes:400,
+                q:"Class name"
+                }
+            };
+            >>>>>>> master
+            =======
+                maxRes:400,
+                q:"Class name"
+                }
+            };
+            >>>>>>> master
+
+            //var allClasses = [];
+
+            /*
+            This classes array is a stack array storing course objects with the following parameters
+
+            courseTitle
+            className
+            subject
+            term
+            catalog_nbr
+            course_nbr
+            startTime
+            endTime
+            location
+            intructor
+            seatsLeft
+            */
+
+//Create a course object, populate its array of all sections, then push into pQueue
+
+            function pQueue() {
+                //How many courses are currently avaliable
+                this.totalCourseNumber = 0;
+
+                //An array of courses which will all have arrays of each section
+                this.courseArray = [];
+
+                this.sortByAvaliableCourseNum = function () {
+                    //sort by avaliable course num putting the course with the least classes in the front
+                }
+            }
+            pQueue.prototype.addCourse=function(courseName,callback){
+                //Check if course already is added
+                this.totalCourseNumber+=1;
+
+                this.courseArray.push(new Course(courseName));
+                console.log(courseName," added!\n");
+                this.courseArray[(this.totalCourseNumber-1)].populateSectionArray(courseName,callback);
+            };
+
+            pQueue.prototype.printAllPossibleSchedules = function(){
+                //print all possible schedules
+
+                console.log("Your optimal schedule -->\n");
+
+                //console.log("Course : ",section.name," at ",section.startTimeReadable, " to ",section.endTimeReadable);
+
+
+
+                var actualThis=this;
+                function recursiveIterator(courseCounter){
+
+                    var sectionCounter=0;
+                    //console.log(actualThis.courseArray[courseCounter].sectionArray.length);
+
+                    while(sectionCounter<actualThis.courseArray[courseCounter].sectionArray.length){
+
+                        tempSchedule[courseCounter]=actualThis.courseArray[courseCounter].sectionArray[sectionCounter];
+                        // console.log(tempSchedule[courseCounter]);
+
+                        if(courseCounter==(actualThis.courseArray.length-1)){
+
+                            //setTimeout(function(){ totalPossibleScheduleArray.push(tempSchedule); }, 5);
+                            //totalPossibleScheduleArray.push(tempSchedule);
+
+
+                            console.log(tempSchedule);
+                        }
+                        else{
+                            //Else call the iterator on the next
+                            recursiveIterator(courseCounter+1);
+                        }
+                        sectionCounter++
+                    }
+
+                }
+
+                var totalPossibleScheduleArray=[];
+                var tempSchedule=[];
+
+                recursiveIterator(0);
+                console.log(totalPossibleScheduleArray);
+
+
+
+                //console.log(this.courseArray[2].sectionArray);
+                //console.log(totalPossibleScheduleArray[0]==totalPossibleScheduleArray[5]);
+
+
+                //not recursive implimentation?
+
+                /*
+                    var courseCounter = 0;
+
+                    while(courseCounter<this.courseArray.length) {
+
+                        var sectionCounter = 0;
+                        //console.log(actualThis.courseArray[courseCounter].sectionArray.length);
+
+                        while (sectionCounter < actualThis.courseArray[courseCounter].sectionArray.length) {
+
+                            tempSchedule[courseCounter] = actualThis.courseArray[courseCounter].sectionArray[sectionCounter];
+                            // console.log(tempSchedule[courseCounter]);
+
+                            if (courseCounter == (actualThis.courseArray.length - 1)) {
+                                totalPossibleScheduleArray.push(tempSchedule);
+
+
+                                //console.log(tempSchedule);
+                            }
+                            else {
+                                //Else call the iterator on the next
+                                recursiveIterator(courseCounter + 1);
+                            }
+                            sectionCounter++
+                        }
+                    }
+                */
+
+            };
+
+
+
+
+//Constructor for CourseClass
+            function Course(courseName){
+
+                //Static Variables
+                //Data for the post request
+                var options= { method: 'POST',
+                    url: 'https://www.scu.edu/apps/ws/courseavail/search/4020/ugrad',
+                    headers:
+                        { 'postman-token': '7cd6dfe8-18eb-6274-990e-900d443f84d8',
+                            'cache-control': 'no-cache',
+                            cookie: '_ga=GA1.2.1247169440.1530396441; _gid=GA1.2.53034684.1530396441; _4c_=dVRhb5swEP0rE1L4FBFsMJBIaIpo1mXq1ipruo%2BTMSZYA8xskzSqym%2FvmTSd2rWROHy%2Bd%2B%2Fd2UcenEPFW2eBiJ%2BgIEJxQqJk6vzhR%2B0sHhzWWbu35otUXHPuLF5WU2erubpUsgeUo2lrgoQEEezfKFn0zKwL2L8SZpPBXq9q8CpjusVstpPejtZ8Z3M9JhuvFnmn5P3R06z3eNHPOj0TXiE%2Fm2NKtbtPsYfcPn0RcYVJL9YSSF2dblZXq7vlj2zlduko5%2F416e16mGB8S4%2B1VBOcTbB%2FKxppqiOsLrxJsIT3914LBm%2FaFmAZ7YShtdDNKUrhqYQ2UtkcWYIxFQfb2f5bA%2FTDcHc9kHAY1tsBDcPN1mpmX6%2FX2erEkfVKjVB%2Fw%2FeCHzSsSluQv2S04M0ofyVyRZXgEATG5Xa4qURdiw58W%2FfG%2B%2Ba5dZO6%2BpAeXNqbKpN9a1IEp8pkYa8Ezb3Q88EvhGZyz9XxJ1d7wfj6AqKwnyt5gMsCJ6uUbPinyGaX9uIQDqPQJyQJPRTGcRKFBBMISpgA55doC8gEV%2FGSQy%2BWAjwtjNV9dYmwbbhqbBosO5gax4rUkgEKHJizqXO5%2FL0di3pf9nHq3J%2BmEWNMAowwAlYDowMA3%2F4AoQQM1jiWDiUJmUN6GbEiQkUUx3lZxnnICj9HURKD4siHyByoAh%2F5ERB0wDfmA%2FmzHDwEwih%2BlkPhi5zt5A16LA7Q8%2F%2BLK6ihOdX84yzsv9MSO3dkVG8%2FrddV49hizDOmpLXmbyA4mgOEtezc2seg5t%2FxxRyx2EdBwkmeRDHPsZ%2FAYZJ4Hvg5pvhtISeCnSrPpZz%2FN8bQO%2BDHxyc%3D; cX_G=cx%3A1wn8gqmnl5he12x16h4gdbw4i2%3Aykmb99z9d7i4; cX_P=jairjjaa9a8h449t; _ga=GA1.2.1246405584.1477864525; MAID=h6hjO7GjjEW/hXTPEnQenQ==; __unam=6aca27b-15ebb2a87f8-b54334f-4; MACHINE_LAST_SEEN=2018-06-14T18%3A41%3A05.291-07%3A00; _vwo_uuid_v2=D7C480D70160CEE4406DF04D22DE7386F|9edbac4604ea9fd23a7320d281de7e91; _vwo_uuid=D7C480D70160CEE4406DF04D22DE7386F; s_fid=23416A566F03CBEF-1D3E8B3E6FA9F2A9; AMCV_774C31DD5342CAF40A490D44%40AdobeOrg=793872103%7CMCIDTS%7C17700%7CMCMID%7C54767819144511968814036582437993054835%7CMCAAMLH-1529632044%7C9%7CMCAAMB-1529801511%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCAID%7CNONE; _gcl_au=1.1.880407339.1537941031; PHPSESSID=85e6e5d3f55b755260969b5dcf678215; _gid=GA1.2.1598081948.1538278390',
+                            'accept-language': 'en-US,en;q=0.9',
+                            'accept-encoding': 'gzip, deflate, br',
+                            referer: 'https://www.scu.edu/apps/courseavail/?p=schedule',
+                            'content-type': 'application/x-www-form-urlencoded',
+                            dnt: '1',
+                            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+                            'x-requested-with': 'XMLHttpRequest',
+                            origin: 'https://www.scu.edu',
+                            accept: '*/*' },
+                    form: {
+                        maxRes: 400,
+                        q: "Math 10"
+                    }
+                };
+
+                //Private Member Variables
+                this.courseName = courseName;
+                this.avaliable = true;
+                this.sectionArray = [];
+
+            }
+            Course.prototype.getSection = function(element){
+                return this.sectionArray[element];
+            };
+
+            Course.prototype.sortSectionsByPriority=function(){
+
+            };
+            Course.prototype.populateSectionArray = function(course,callback){
+                var actualThis=this;
+                //Add course name to post request
+                options.form.q=course;
+
+                //Function to request data and call back to return said data
+                request(options,function (error, response, body) {
+                    if (error) throw new Error(error);
+
+                    //Parse body string into a readable JSON format
+                    parsedBody=JSON.parse(response.body);
+
+                    //create an array with data of section and add it to the big array of classes
+                    // console.log(body);
+
+                    arr=parsedBody.results;
+                    for (var i = 0; i < arr.length; i++) {
+                        var section= new Section(
+                            //Uses the subject and catalog_nbr to make name (instead of requestBody)
+                            arr[i].subject.concat(' ', arr[i].catalog_nbr),
+                            arr[i].mtg_time_beg_1,
+                            arr[i].mtg_time_end_1,
+                            arr[i].class_nbr,
+                            arr[i].mtg_days_1,
+                            arr[i].seats_remaining
+                        );
+                        //console.log(section);
+                        //push the section object on the classes stack
+                        actualThis.sectionArray.push(section);
+
+
+                    }
+                    callback();
+
+                });
+
+            }
+
+//get_data("MATH 12",options,request);
+//get_data("COEN 12L",options,request);
+
+
+
+//MAIN STUFF
+
+            var coenStudentsSchedule= new pQueue();
+
+            function tester() {
+                coenStudentsSchedule.addCourse("MATH 12",function(){
+                    coenStudentsSchedule.addCourse("COEN 12",function(){
+                        coenStudentsSchedule.addCourse("ELEN 50",function(){
+                            //setTimeout(function(){ }, 3000);
+                            coenStudentsSchedule.printAllPossibleSchedules();
+
+                        });
+                    });
+                });
+
+
+            }
+
+
+    </script>
+</head>
+<body>
+<input id="Get all possible schedules" type="button" value="clickme" onclick="tester();" />
+
+</body>
+</html>
